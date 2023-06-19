@@ -104,7 +104,7 @@ def room(request, pk):
     # create new comment and add it to database
     if request.method == "POST":
         if request.user.is_authenticated:
-            message = Message.objects.create(
+            Message.objects.create(
                 user=request.user,
                 room=room,
                 body=request.POST.get("body"),
