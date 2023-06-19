@@ -1,7 +1,4 @@
-{% extends 'main.html' %}
-
-{% block content %}
-
+{% extends 'main.html' %} {% block content %}
 
 <main class="profile-page layout layout--2">
   <div class="container">
@@ -10,18 +7,23 @@
       <div class="room__top">
         <div class="room__topLeft">
           <a href="{% url 'home' %}">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <svg
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+            >
               <title>arrow-left</title>
               <path
                 d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z"
               ></path>
             </svg>
           </a>
-          <h3>Study Room</h3>
+          <h3>available rooms</h3>
         </div>
 
         <div class="room__topRight">
-
           <a href="{% url 'update-room' room.id %}">
             <svg
               enable-background="new 0 0 24 24"
@@ -32,7 +34,9 @@
             >
               <title>edit</title>
               <g>
-                <path d="m23.5 22h-15c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h15c.276 0 .5.224.5.5s-.224.5-.5.5z" />
+                <path
+                  d="m23.5 22h-15c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h15c.276 0 .5.224.5.5s-.224.5-.5.5z"
+                />
               </g>
               <g>
                 <g>
@@ -50,7 +54,13 @@
           </a>
 
           <a href="{% url 'delete-room' room.id %}">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <svg
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+            >
               <title>remove</title>
               <path
                 d="M27.314 6.019l-1.333-1.333-9.98 9.981-9.981-9.981-1.333 1.333 9.981 9.981-9.981 9.98 1.333 1.333 9.981-9.98 9.98 9.98 1.333-1.333-9.98-9.98 9.98-9.981z"
@@ -80,46 +90,56 @@
           <div class="room__info">
             <h3>{{room.room_name}}</h3>
             {% if room.updated == room.create_time %}
-              <span>{{room.create_time|timesince}} ago</span>
-            {% else %}
-              last update <span>{{room.updated|timesince}} ago</span>
+            <span>{{room.create_time|timesince}} ago</span>
+            {% else %} last update <span>{{room.updated|timesince}} ago</span>
             {% endif %}
           </div>
           <div class="room__hosted">
             <p>Hosted By</p>
-            <a href="{% url 'user-profile' room.host.username %}" class="room__author">
+            <a
+              href="{% url 'user-profile' room.host.username %}"
+              class="room__author"
+            >
               <div class="avatar avatar--small">
                 <img src="{{room.host.avatar.url}}" />
               </div>
               <span>@{{ room.host.username }}</span>
             </a>
           </div>
-          <div class="room__details">
-            {{room.description}}
-          </div>
+          <div class="room__details">{{room.description}}</div>
           <span class="room__topics">{{room.topic}}</span>
         </div>
         <div class="room__conversation">
           <div class="threads scroll">
-
             {% for message in room_messages %}
 
             <div class="thread">
               <div class="thread__top">
                 <div class="thread__author">
-                  <a href="{% url 'user-profile' message.user.username %}" class="thread__authorInfo">
+                  <a
+                    href="{% url 'user-profile' message.user.username %}"
+                    class="thread__authorInfo"
+                  >
                     <div class="avatar avatar--small">
                       <img src="{{message.user.avatar.url}}" />
                     </div>
                     <span>@{{message.user}}</span>
                   </a>
-                  <span class="thread__date">{{message.create_time|timesince}} ago</span>
+                  <span class="thread__date"
+                    >{{message.create_time|timesince}} ago</span
+                  >
                 </div>
 
                 {% if message.user == request.user %}
                 <div class="thread__delete">
                   <a href="{% url 'delete-message' message.id %}">
-                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                    <svg
+                      version="1.1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="32"
+                      height="32"
+                      viewBox="0 0 32 32"
+                    >
                       <title>remove</title>
                       <path
                         d="M27.314 6.019l-1.333-1.333-9.98 9.981-9.981-9.981-1.333 1.333 9.981 9.981-9.981 9.98 1.333 1.333 9.981-9.98 9.98 9.98 1.333-1.333-9.98-9.98 9.98-9.981z"
@@ -128,16 +148,11 @@
                   </a>
                 </div>
                 {% endif %}
-
               </div>
-              <div class="thread__details">
-                {{message.body}}
-              </div>
+              <div class="thread__details">{{message.body}}</div>
             </div>
 
             {% endfor %}
-
-
           </div>
         </div>
       </div>
@@ -150,17 +165,20 @@
         </form>
       </div>
       {% endif %}
-
     </div>
     <!-- Room End -->
 
     <!--   Start -->
     <div class="participants">
-      <h3 class="participants__top">Participants <span>({{participants.all.count}} Joined)</span></h3>
+      <h3 class="participants__top">
+        Participants <span>({{participants.all.count}} Joined)</span>
+      </h3>
       <div class="participants__list scroll">
-
         {% for participant in participants %}
-        <a href="{% url 'user-profile' participant.username %}" class="participant">
+        <a
+          href="{% url 'user-profile' participant.username %}"
+          class="participant"
+        >
           <div class="avatar avatar--medium">
             <img src="{{participant.avatar.url}}" />
           </div>
@@ -170,12 +188,10 @@
           </p>
         </a>
         {% endfor %}
-
       </div>
     </div>
     <!--  End -->
   </div>
 </main>
-
 
 {% endblock %}

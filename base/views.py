@@ -19,25 +19,21 @@ def loginPage(request):
         return redirect("home")
 
     if request.method == "POST":
-        username = request.POST.get("email").lower()
+        email = request.POST.get("email").lower()
         password = request.POST.get("password")
 
         # try to find user in database
         try:
-            user = User.objects.get(email=username)
+            user = User.objects.get(email=email)
         # if user is not registered
         except:
-            messages.error(request, "Invalid username or password")
+            messages.error(request, "Invalid login credentials")
 
-        user = authenticate(request=request, email=username, password=password)
+        user = authenticate(request=request, email=email, password=password)
 
         if user is not None:
             login(request, user)
             return redirect("home")
-
-        # if user is not registered
-        else:
-            messages.error(request, "Invalid username or password")
 
     context = {"page": page}
     return render(request, "base/login_register.html", context)
@@ -182,7 +178,6 @@ def userSettings(request):
             return HttpResponse("You are not allowed to edit this room")
     except:
         messages.error(request, "Error creating user settings")
-
 
 
 @login_required(login_url="/login")
